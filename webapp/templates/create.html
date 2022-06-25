@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Новая задача</title>
+</head>
+<body>
+    <h1>Новая задача</h1>
+    <form action="task/add/" method="post">
+        {% csrf_token %}
+        <label>Описание задачи:</label><br/>
+        <textarea name="description"></textarea><br/>
+        <label>Статус задачи:</label><br/>
+        <input type="text" name="status"/><br/>
+        <label>Дата выполнения:</label><br/>
+        <input type="text" name="completion_date"/><br/>
+        <br/>
+        <input type="submit" value="Создать"/>
+    </form><br/>
+    <a href="/">На главную</a>
+</body>
+</html>

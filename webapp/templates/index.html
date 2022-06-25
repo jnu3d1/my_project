@@ -5,13 +5,13 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>Список задач</title>
 </head>
 <body>
     <h1>Список задач</h1>
-    <a href="tasks/add/">Новая задача</a>
+    <a href="task/add/">Новая задача</a>
     {% for task in tasks %}
-        <p>{{ task.description }} <a href="/">Подробнее</a></p>
+        <p>{{ task.description }} <a href="task/?pk={{ task.pk }}">Подробнее</a></p>
     {% endfor %}
 </body>
 </html>

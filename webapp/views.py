@@ -10,7 +10,17 @@ def index(request):
     return render(request, 'index.html', context)
 
 def create_task(request):
-    pass
+    if request.method == 'GET':
+        return render(request, 'create.html')
+    else:
+        desctiption = request.POST.get('description')
+        status = reques.POST.get('status')
+        completion_date = request.POST.get('completion_date')
+        new_task = Task.objects.create(desctiption=desctiption, status=status, completion_date=completion_date)
+        context = {'task': new_task}
+        return render(request, 'task_view.html', context)
 
 def task_view(request):
-    pass
+    pk = request.GET.get('pk')
+    task = Task.objects.get(pk=pk)
+    return render(request, 'task_view.html', {'task': task})
