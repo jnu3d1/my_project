@@ -9,14 +9,18 @@
 </head>
 <body>
     <h1>Новая задача</h1>
-    <form action="task/add/" method="post">
+    <form action="/tasks/add/" method="post">
         {% csrf_token %}
         <label>Описание задачи:</label><br/>
         <textarea name="description"></textarea><br/>
         <label>Статус задачи:</label><br/>
-        <input type="text" name="status"/><br/>
+        <select name="status">
+            <option selected value="new">Новая</option>
+            <option value="in_progress">В процессе</option>
+            <option value="done">Сделано</option>
+        </select><br/>
         <label>Дата выполнения:</label><br/>
-        <input type="text" name="completion_date"/><br/>
+        <input type="date" name="completion_date"/><br/>
         <br/>
         <input type="submit" value="Создать"/>
     </form><br/>
