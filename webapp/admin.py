@@ -5,7 +5,8 @@ from django.contrib import admin
 from webapp.models import Task
 
 class TasksAdmin(admin.ModelAdmin):
-    list_display = ['id', 'description', 'status']
+    list_display = ['description', 'status']
+    list_display_links = ['description']
     list_filter = ['status']
     search_fields = ['description']
     fields = ['description', 'status', 'completion_date', 'created_at', 'updated_at']
