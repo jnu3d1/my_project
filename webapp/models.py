@@ -8,6 +8,7 @@ class Task(models.Model):
         ('new', 'Новая'),
         ('in_progress', 'В процессе'),
         ('done', 'Сделано')]
+    title = models.CharField(max_length=50, verbose_name='Заголовок')
     description = models.TextField(max_length=3000, verbose_name='Описание')
     status = models.CharField(max_length=11, verbose_name='Статус', choices=status_choices, default='new')
     completion_date = models.CharField(max_length=50, blank=True, verbose_name='Дата выполнения')
@@ -15,7 +16,7 @@ class Task(models.Model):
     updated_at = models.DateTimeField(auto_now=True, verbose_name="Дата изменения")
 
     def __str__(self):
-        return f'{self.id}. {self.description}: {self.status}'
+        return f'{self.id}. {self.title}: {self.status}'
 
     class Meta:
         db_table = 'tasks'
