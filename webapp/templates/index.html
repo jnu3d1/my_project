@@ -9,9 +9,9 @@
 </head>
 <body>
     <h1>Список задач</h1>
-    <a href="/tasks/add/">Новая задача</a>
+    <a href="{% url "create_task" %}">Новая задача</a>
     {% for task in tasks %}
-        <p>{{ task.description }} <a href="task/?pk={{ task.pk }}">Подробнее</a></p>
+        <p>{{ task.description }} <a href="{% url "task_view" task.pk %}">Подробнее</a></p>
     {% endfor %}
 </body>
 </html>
