@@ -11,8 +11,10 @@
     <h1>Новая задача</h1>
     <form action="/tasks/add/" method="post">
         {% csrf_token %}
+        <label>Заголовок задачи:</label><br/>
+        <input type="text" name="title" required/><br/>
         <label>Описание задачи:</label><br/>
-        <textarea name="description"></textarea><br/>
+        <textarea name="description" required></textarea><br/>
         <label>Статус задачи:</label><br/>
         <select name="status">
             <option selected value="new">Новая</option>
