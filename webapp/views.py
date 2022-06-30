@@ -7,7 +7,7 @@ from django.urls import reverse
 from webapp.models import Task
 
 def index(request):
-    tasks = Task.objects.all()
+    tasks = Task.objects.order_by('-status')
     context = {'tasks': tasks}
     return render(request, 'index.html', context)
 
@@ -43,3 +43,17 @@ def delete_task(request):
     task = Task.objects.get(pk=pk)
     removal = task.delete()
     return render(request, 'index.html', {'action': removal})
+
+def edit_task(request, pk):
+    task = get_object_or_404(Task, pk=pk)
+    if request.method == 'GET':
+        return render(request, 'edit.html', {'task': task})
+    else:
+        task.title = request.POST.get('title')
+        task.description = request.POST.get('description')
+        task.status = request.POST.get('status')
+        task.completion_date = request.POST.get('completion_date')
+        if not task.completion_date:
+            task.completion_date = None
+        task.save()
+        return redirect('task_view', pk=task.pk)
