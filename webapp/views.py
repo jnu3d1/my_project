@@ -35,7 +35,7 @@ def task_view(request, pk):
     try:
         task = Task.objects.get(pk=pk)
     except Task.DoesNotExist:
-        return HttpResponseNotFound('Страница не найдена')
+        return HttpResponseNotFound('<h1>Страница не найдена</h1>')
     return render(request, 'task_view.html', {'task': task})
 
 def delete_task(request):

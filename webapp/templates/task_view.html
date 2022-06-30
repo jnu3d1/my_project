@@ -1,13 +1,9 @@
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Задача</title>
-</head>
-<body>
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Задача {{ task.pk }}{% endblock %}
+
+{% block content %}
     <h3>Заголовок задачи:</h3>
     <p>
         {{ task.title }}
@@ -25,10 +21,9 @@
         {{ task.completion_date|default_if_none:"Бессрочная" }}
     </p>
     <p>
-        <a href="/">На главную</a>
+        <a href="{% url "index" %}">На главную</a>
     </p>
     <p>
-        <a href="/tasks/delete/">Удалить задачу</a>
+        <a href="{% url "delete_task" %}">Удалить задачу</a>
     </p>
-</body>
-</html>
+{% endblock %}
