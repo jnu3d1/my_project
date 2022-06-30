@@ -11,7 +11,7 @@ class Task(models.Model):
     title = models.CharField(max_length=50, verbose_name='Заголовок')
     description = models.TextField(max_length=3000, verbose_name='Описание')
     status = models.CharField(max_length=11, verbose_name='Статус', choices=status_choices, default='new')
-    completion_date = models.CharField(max_length=50, blank=True, verbose_name='Дата выполнения')
+    completion_date = models.DateField(null=True, blank=True, verbose_name='Дата выполнения')
     created_at = models.DateTimeField(auto_now_add=True, verbose_name="Дата создания")
     updated_at = models.DateTimeField(auto_now=True, verbose_name="Дата изменения")
 
@@ -20,5 +20,5 @@ class Task(models.Model):
 
     class Meta:
         db_table = 'tasks'
-        verbose_name = "Задача"
+        verbose_name = 'Задача'
         verbose_name_plural = 'Задачи'

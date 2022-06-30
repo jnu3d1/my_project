@@ -22,7 +22,7 @@
     </p>
     <h3>Дата выполнения:</h3>
     <p>
-        {{ task.completion_date }}
+        {{ task.completion_date|default_if_none:"Бессрочная" }}
     </p>
     <p>
         <a href="/">На главную</a>

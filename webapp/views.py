@@ -19,6 +19,8 @@ def create_task(request):
         description = request.POST.get('description')
         status = request.POST.get('status')
         completion_date = request.POST.get('completion_date')
+        if not completion_date:
+            completion_date = None
         new_task = Task.objects.create(title=title, description=description, status=status, completion_date=completion_date)
         # context = {'task': new_task}
         return redirect('task_view', pk=new_task.pk)
