@@ -1,5 +1,4 @@
 {% extends "base.html" %}
-{% load static %}
 
 {% block title %}Задача {{ task.pk }}{% endblock %}
 
@@ -27,6 +26,6 @@
         <a href="{% url "task_editing" task.pk %}">Редактировать задачу</a>
     </p>
     <p>
-        <a href="{% url "delete_task" %}">Удалить задачу</a>
+        <a href="{% url "delete_task" task.pk %}">Удалить задачу</a>
     </p>
 {% endblock %}
