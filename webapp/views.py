@@ -1,6 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from django.http import HttpResponseRedirect, HttpResponseNotFound
-from django.urls import reverse
+from django.http import HttpResponseNotFound
 
 # Create your views here.
 
@@ -25,17 +24,10 @@ def create_task(request):
             completion_date = None
         new_task = Task.objects.create(title=title, description=description, status=status,
                                        completion_date=completion_date)
-        # context = {'task': new_task}
         return redirect('task_view', pk=new_task.pk)
-        # return HttpResponseRedirect(reverse('task_view', kwargs={'pk': new_task.pk}))
-        # return HttpResponseRedirect(f'/task/{new_task.pk}')
-        # return HttpResponseRedirect(f'/task?pk={new_task.pk}')
-        # return render(request, 'task_view.html', context)
 
 
 def task_view(request, pk):
-    # pk = request.GET.get('pk')
-    # task = get_object_or_404(Task, pk=pk)
     try:
         task = Task.objects.get(pk=pk)
     except Task.DoesNotExist:
