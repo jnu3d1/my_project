@@ -8,4 +8,5 @@
     {% for task in tasks %}
         <p>{{ task.title }} <a href="{% url "task_view" task.pk %}">Подробнее</a></p>
     {% endfor %}
+    <p><a href="{% url "delete_multiple" %}">Удалить</a></p>
 {% endblock %}

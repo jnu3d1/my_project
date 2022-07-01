@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block title %}Удаление выбранных задач{% endblock %}
+
+{% block content %}
+    <h1>Список задач</h1>
+    <form action="" method="post">
+        {% csrf_token %}
+        {% for task in tasks %}
+            <p><input type="checkbox" name="checks[]" value="{{ task.pk }}"> {{ task.title }}</p>
+        {% endfor %}
+        <p><input type="submit" value="Удалить"></p>
+    </form>
+    <p>
+        <a href="{% url "index" %}">На главную</a>
+    </p>
+{% endblock %}

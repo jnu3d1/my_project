@@ -6,21 +6,6 @@
     <h1>Изменить задачу</h1>
     <form action="" method="post">
         {% include "partial/form.html"  with button_text="Изменить" %}
-{#        {% csrf_token %}#}
-{#        <label>Заголовок задачи:</label><br/>#}
-{#        <input type="text" name="title" value="{{ task.title }}" required/><br/>#}
-{#        <label>Описание задачи:</label><br/>#}
-{#        <textarea name="description" placeholder="Придется написать заново, да!" required></textarea><br/>#}
-{#        <label>Статус задачи:</label><br/>#}
-{#        <select name="status">#}
-{#            <option value="new">Новая</option>#}
-{#            <option value="in_progress">В процессе</option>#}
-{#            <option value="done">Сделано</option>#}
-{#        </select><br/>#}
-{#        <label>Дата выполнения:</label><br/>#}
-{#        <input type="date" name="completion_date" value="{{ task.completion_date }}"/><br/>#}
-{#        <br/>#}
-{#        <input type="submit" value="Изменить"/>#}
     </form><br/>
     <a href="{% url "index" %}">На главную</a>
 {% endblock %}

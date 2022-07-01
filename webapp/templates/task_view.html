@@ -20,12 +20,12 @@
         {{ task.completion_date|default_if_none:"Бессрочная" }}
     </p>
     <p>
-        <a href="{% url "index" %}">На главную</a>
-    </p>
-    <p>
         <a href="{% url "task_editing" task.pk %}">Редактировать задачу</a>
     </p>
     <p>
         <a href="{% url "delete_task" task.pk %}">Удалить задачу</a>
+    </p>
+    <p>
+        <a style="color: red;" href="{% url "index" %}"><b>На главную</b></a>
     </p>
 {% endblock %}
