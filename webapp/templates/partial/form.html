@@ -2,7 +2,7 @@
 <label>Заголовок задачи:</label><br/>
 <input type="text" name="title" value="{{ task.title }}" required/><br/>
 <label>Описание задачи:</label><br/>
-<textarea name="description" placeholder="{{ task.description }}" required></textarea><br/>
+<textarea name="description">{{ task.description }}</textarea><br/>
 <label>Статус задачи:</label><br/>
 <select name="status">
     <option value="new">Новая</option>
