@@ -2,14 +2,17 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponseNotFound
 
 # Create your views here.
+from django.views import View
+from django.views.generic import TemplateView, RedirectView
 
 from webapp.models import Task
 
 
-def index(request):
-    tasks = Task.objects.order_by('-status')
-    context = {'tasks': tasks}
-    return render(request, 'index.html', context)
+class IndexView(View):
+    def get(self, request):
+        tasks = Task.objects.order_by('-status')
+        context = {'tasks': tasks}
+        return render(request, 'index.html', context)
 
 
 def create_task(request):
@@ -27,13 +30,28 @@ def create_task(request):
         return redirect('task_view', pk=new_task.pk)
 
 
-def task_view(request, pk):
-    try:
-        task = Task.objects.get(pk=pk)
-    except Task.DoesNotExist:
-        return HttpResponseNotFound('<h1>Страница не найдена</h1>')
-    return render(request, 'task_view.html', {'task': task})
+class TaskView(TemplateView):
+    template_name = 'task_view.html'
 
+    # def get_template_names(self):
+    #     return 'task_view.html'
+
+    def get_context_data(self, **kwargs):
+        pk = kwargs.get('pk')
+        task = get_object_or_404(Task, pk=pk)
+        kwargs['task'] = task
+        return super().get_context_data(**kwargs)
+
+# def task_view(request, pk):
+#     try:
+#         task = Task.objects.get(pk=pk)
+#     except Task.DoesNotExist:
+#         return HttpResponseNotFound('<h1>Страница не найдена</h1>')
+#     return render(request, 'task_view.html', {'task': task})
+
+
+class MyRedirectView(RedirectView):
+    url = "https://p.ya.ru/bishkek"
 
 def delete_task(request, pk):
     task = get_object_or_404(Task, pk=pk)

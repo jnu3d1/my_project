@@ -19,6 +19,12 @@
     <p>
         {{ task.completion_date|default_if_none:"Бессрочная" }}
     </p>
+    <h3>Комментарии</h3>
+    {% for comment in task.comments.all %}
+        <p>{{ comment.text }}</p>
+    {% empty %}
+        <p>Никто не оставил комментариев</p>
+    {% endfor %}
     <p>
         <a href="{% url "task_editing" task.pk %}">Редактировать задачу</a>
     </p>
