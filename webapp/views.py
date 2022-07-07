@@ -42,6 +42,7 @@ class TaskView(TemplateView):
         kwargs['task'] = task
         return super().get_context_data(**kwargs)
 
+
 # def task_view(request, pk):
 #     try:
 #         task = Task.objects.get(pk=pk)
@@ -52,6 +53,7 @@ class TaskView(TemplateView):
 
 class MyRedirectView(RedirectView):
     url = "https://p.ya.ru/bishkek"
+
 
 def delete_task(request, pk):
     task = get_object_or_404(Task, pk=pk)
