@@ -11,11 +11,14 @@ class BaseModel(models.Model):
         abstract = True
 
 
+status_choices = [
+    ('new', 'Новая'),
+    ('in_progress', 'В процессе'),
+    ('done', 'Сделано')
+]
+
+
 class Task(BaseModel):
-    status_choices = [
-        ('new', 'Новая'),
-        ('in_progress', 'В процессе'),
-        ('done', 'Сделано')]
     title = models.CharField(max_length=50, verbose_name='Заголовок')
     description = models.TextField(max_length=3000, verbose_name='Описание')
     status = models.CharField(max_length=11, verbose_name='Статус', choices=status_choices, default='new')
@@ -42,4 +45,3 @@ class Comment(BaseModel):
         db_table = 'comments'
         verbose_name = 'Комментарий'
         verbose_name_plural = 'Комментарии'
-

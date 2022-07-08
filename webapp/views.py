@@ -5,6 +5,7 @@ from django.http import HttpResponseNotFound
 from django.views import View
 from django.views.generic import TemplateView, RedirectView
 
+from forms import TaskForm
 from webapp.models import Task
 
 
@@ -17,17 +18,21 @@ class IndexView(View):
 
 def create_task(request):
     if request.method == 'GET':
-        return render(request, 'create.html')
+        form = TaskForm()
+        return render(request, 'create.html', {'form': form})
     else:
-        title = request.POST.get('title')
-        description = request.POST.get('description')
-        status = request.POST.get('status')
-        completion_date = request.POST.get('completion_date')
-        if not completion_date:
-            completion_date = None
-        new_task = Task.objects.create(title=title, description=description, status=status,
-                                       completion_date=completion_date)
-        return redirect('task_view', pk=new_task.pk)
+        form = TaskForm(data=request.POST)
+        if form.is_valid():
+            title = form.cleaned_data.get('title')
+            description = form.cleaned_data.get('description')
+            status = form.cleaned_data.get('status')
+            completion_date = form.cleaned_data.get('completion_date')
+            # if not completion_date:
+            #     completion_date = None
+            new_task = Task.objects.create(title=title, description=description, status=status,
+                                           completion_date=completion_date)
+            return redirect('task_view', pk=new_task.pk)
+        return render(request, 'create.html', {'form': form})
 
 
 class TaskView(TemplateView):
@@ -66,16 +71,25 @@ def delete_task(request, pk):
 def edit_task(request, pk):
     task = get_object_or_404(Task, pk=pk)
     if request.method == 'GET':
-        return render(request, 'edit.html', {'task': task})
+        form = TaskForm(initial={
+            'title': task.title,
+            'description': task.description,
+            'status': task.status,
+            'completion_date': task.completion_date
+        })
+        return render(request, 'edit.html', {'form ': form})
     else:
-        task.title = request.POST.get('title')
-        task.description = request.POST.get('description')
-        task.status = request.POST.get('status')
-        task.completion_date = request.POST.get('completion_date')
-        if not task.completion_date:
-            task.completion_date = None
-        task.save()
-        return redirect('task_view', pk=task.pk)
+        form = TaskForm(data=request.POST)
+        if form.is_valid():
+            task.title = form.cleaned_data.get('title')
+            task.description = form.cleaned_data.get('description')
+            task.status = form.cleaned_data.get('status')
+            task.completion_date = form.cleaned_data.get('completion_date')
+            # if not task.completion_date:
+            #     task.completion_date = None
+            task.save()
+            return redirect('task_view', pk=task.pk)
+        return render(request, 'edit.html', {'form': form})
 
 
 def delete_multiple(request):

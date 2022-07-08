@@ -1,15 +1,31 @@
 {% csrf_token %}
-<label>Заголовок задачи:</label><br/>
-<input type="text" name="title" value="{{ task.title }}" required/><br/>
-<label>Описание задачи:</label><br/>
-<textarea name="description">{{ task.description }}</textarea><br/>
-<label>Статус задачи:</label><br/>
-<select name="status">
-    <option value="new">Новая</option>
-    <option value="in_progress">В процессе</option>
-    <option value="done">Сделано</option>
-</select><br/>
-<label>Дата выполнения:</label><br/>
-<input type="date" name="completion_date" value="{{ task.completion_date }}"/><br/>
-<br/>
+
+{#{% for error in form.non_field_errors %}#}
+{#    <p class="">{{ error }}</p>#}
+{#{% endfor %}#}
+
+{% for field in form %}
+    <p><label for="{{ field.id_for_label }}">{{ field.label }}</label></p>
+    {% for error in field.errors %}
+        <p class="">{{ error }}</p>
+    {% endfor %}
+    <p>{{ field }}</p>
+{% endfor %}
+
+{#{{ form.as_p }}#}
+
+{#<label>Заголовок задачи:</label><br/>#}
+{#<input type="text" name="title" value="{{ task.title }}" required/><br/>#}
+{#<label>Описание задачи:</label><br/>#}
+{#<textarea name="description">{{ task.description }}</textarea><br/>#}
+{#<label>Статус задачи:</label><br/>#}
+{#<select name="status">#}
+{#    <option value="new">Новая</option>#}
+{#    <option value="in_progress">В процессе</option>#}
+{#    <option value="done">Сделано</option>#}
+{#</select><br/>#}
+{#<label>Дата выполнения:</label><br/>#}
+{#<input type="date" name="completion_date" value="{{ task.completion_date }}"/><br/>#}
+{#<br/>#}
+
 <input type="submit" value="{{ button_text }}"/>
